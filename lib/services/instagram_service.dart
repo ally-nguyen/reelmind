@@ -15,7 +15,7 @@ class InstagramService {
     final authUrl = Uri.https('api.instagram.com', '/oauth/authorize', {
       'client_id': _instagramClientId,
       'redirect_uri': _redirectUri,
-      'scope': 'user_profile,user_media',
+      'scope': 'user_profile,user_media,user_liked_media',
       'response_type': 'code',
     });
 
