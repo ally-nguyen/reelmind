@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "688738048762",
+    "firebase_url": "https://reelmind-app-d00f0-default-rtdb.firebaseio.com",
+    "project_id": "reelmind-app-d00f0",
+    "storage_bucket": "reelmind-app-d00f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688738048762:android:00ee5fdd2d44bad8b8c743",
+        "android_client_info": {
+          "package_name": "com.example.video_idea_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688738048762-qotja5c3du0b2q3gfns4jtgalajolnjk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.video_idea_app",
+            "certificate_hash": "f416a9289b56e75dbd37c55bb9afe51589a0724e"
+          }
+        },
+        {
+          "client_id": "688738048762-kslt8hr9dge1vvb0h664ivtsdf3jmq07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMzM95ZMi3OtdMp2Iyn-FAAW-sgW2qxvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688738048762-kslt8hr9dge1vvb0h664ivtsdf3jmq07.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "688738048762-bsoajktedcgscs3oafnhgq0cl5lhno4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.videoIdeaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
