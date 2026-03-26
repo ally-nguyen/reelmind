@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_profile.dart';
 import '../services/auth_service.dart';
+import '../services/firestore_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
@@ -20,8 +21,13 @@ class AuthProvider extends ChangeNotifier {
   AuthProvider() {
     try {
       _authService.userStream.listen(
-        (user) {
+        (user) async {
           _firebaseUser = user;
+          if (user != null && _profile == null) {
+            _profile = await FirestoreService().getProfile(user.uid);
+          } else if (user == null) {
+            _profile = null;
+          }
           notifyListeners();
         },
         onError: (e) {
@@ -62,6 +68,15 @@ class AuthProvider extends ChangeNotifier {
       _error = 'Firebase not configured. Run: flutterfire configure';
     } finally {
       _loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> refreshProfile() async {
+    if (_firebaseUser == null) return;
+    final updated = await FirestoreService().getProfile(_firebaseUser!.uid);
+    if (updated != null) {
+      _profile = updated;
       notifyListeners();
     }
   }

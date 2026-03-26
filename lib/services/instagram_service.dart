@@ -1,6 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
-import '../models/user_profile.dart';
 
 // Replace with your Instagram App credentials
 const _instagramClientId = 'YOUR_INSTAGRAM_APP_ID';
@@ -15,7 +14,7 @@ class InstagramService {
     final authUrl = Uri.https('api.instagram.com', '/oauth/authorize', {
       'client_id': _instagramClientId,
       'redirect_uri': _redirectUri,
-      'scope': 'user_profile,user_media,user_liked_media',
+      'scope': 'user_profile,user_media',
       'response_type': 'code',
     });
 

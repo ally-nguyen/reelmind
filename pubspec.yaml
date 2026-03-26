@@ -60,6 +60,7 @@ dev_dependencies:
 
 dependency_overrides:
   flutter_inappwebview: ^6.1.5
+  flutter_keyboard_visibility: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

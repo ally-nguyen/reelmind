@@ -1,11 +1,35 @@
 class TasteProfile {
+  // Combined signals used for generation (video-first priority)
   final List<String> hashtags;
   final List<String> topics;
+
+  // Their own posts — all media types
+  final List<String> ownHashtags;
+  final List<String> ownTopics;
+
+  // Their own video posts specifically (Reels etc.)
+  final List<String> videoHashtags;
+  final List<String> videoTopics;
+
+  // Content they've liked (requires user_liked_media permission)
+  final List<String> likedHashtags;
+  final List<String> likedTopics;
+
+  final int videoCount;
+  final int totalPostsAnalyzed;
   final DateTime? lastSynced;
 
   TasteProfile({
     this.hashtags = const [],
     this.topics = const [],
+    this.ownHashtags = const [],
+    this.ownTopics = const [],
+    this.videoHashtags = const [],
+    this.videoTopics = const [],
+    this.likedHashtags = const [],
+    this.likedTopics = const [],
+    this.videoCount = 0,
+    this.totalPostsAnalyzed = 0,
     this.lastSynced,
   });
 
@@ -13,6 +37,14 @@ class TasteProfile {
     return TasteProfile(
       hashtags: List<String>.from(data['hashtags'] ?? []),
       topics: List<String>.from(data['topics'] ?? []),
+      ownHashtags: List<String>.from(data['ownHashtags'] ?? []),
+      ownTopics: List<String>.from(data['ownTopics'] ?? []),
+      videoHashtags: List<String>.from(data['videoHashtags'] ?? []),
+      videoTopics: List<String>.from(data['videoTopics'] ?? []),
+      likedHashtags: List<String>.from(data['likedHashtags'] ?? []),
+      likedTopics: List<String>.from(data['likedTopics'] ?? []),
+      videoCount: data['videoCount'] as int? ?? 0,
+      totalPostsAnalyzed: data['totalPostsAnalyzed'] as int? ?? 0,
       lastSynced: data['lastSynced'] != null
           ? (data['lastSynced'] as dynamic).toDate()
           : null,
@@ -23,6 +55,14 @@ class TasteProfile {
     return {
       'hashtags': hashtags,
       'topics': topics,
+      'ownHashtags': ownHashtags,
+      'ownTopics': ownTopics,
+      'videoHashtags': videoHashtags,
+      'videoTopics': videoTopics,
+      'likedHashtags': likedHashtags,
+      'likedTopics': likedTopics,
+      'videoCount': videoCount,
+      'totalPostsAnalyzed': totalPostsAnalyzed,
       'lastSynced': lastSynced,
     };
   }

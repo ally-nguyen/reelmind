@@ -23,10 +23,17 @@ class IdeasProvider extends ChangeNotifier {
 
   void listenToIdeas(String uid) {
     _subscription?.cancel();
-    _subscription = _firestoreService.ideasStream(uid).listen((ideas) {
-      _ideas = ideas;
-      notifyListeners();
-    });
+    _subscription = _firestoreService.ideasStream(uid).listen(
+      (ideas) {
+        _ideas = ideas;
+        _error = null;
+        notifyListeners();
+      },
+      onError: (e) {
+        _error = e.toString();
+        notifyListeners();
+      },
+    );
   }
 
   void stopListening() {
@@ -54,11 +61,27 @@ class IdeasProvider extends ChangeNotifier {
     _error = null;
     notifyListeners();
     try {
-      final idea = await _generatorService.generateIdea(profile);
-      return await _firestoreService.createIdea(idea);
+      // Cloud Function already saves the idea to Firestore — just return it.
+      return await _generatorService.generateIdea(profile);
     } catch (e) {
       _error = e.toString();
       return null;
+    } finally {
+      _generating = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> generateBulletsForIdea(String uid, VideoIdea idea, {String? userInput}) async {
+    _generating = true;
+    _error = null;
+    notifyListeners();
+    try {
+      final bullets = await _generatorService.generateBullets(uid, idea.title, userInput: userInput);
+      idea.bullets = bullets;
+      await _firestoreService.updateIdea(idea);
+    } catch (e) {
+      _error = e.toString();
     } finally {
       _generating = false;
       notifyListeners();
