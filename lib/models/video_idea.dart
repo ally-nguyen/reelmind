@@ -37,8 +37,12 @@ class VideoIdea {
         (s) => s.name == data['source'],
         orElse: () => IdeaSource.manual,
       ),
-      createdAt: (data['createdAt'] as dynamic).toDate(),
-      updatedAt: (data['updatedAt'] as dynamic).toDate(),
+      createdAt: data['createdAt'] != null
+          ? (data['createdAt'] as dynamic).toDate()
+          : DateTime.now(),
+      updatedAt: data['updatedAt'] != null
+          ? (data['updatedAt'] as dynamic).toDate()
+          : DateTime.now(),
     );
   }
 
